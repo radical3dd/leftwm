@@ -229,7 +229,7 @@ impl Window {
         } else if self.floating() && self.floating.is_some() {
             let relative = self.normal + self.floating.unwrap_or_default();
             value = relative.w() - (self.border * 2);
-            tracing::info!("w floating: {:?} relative={:?} border={:?}", self.name, relative, self.border);
+            tracing::info!("w floating: {:?} normal={:?} floating={:?} border={:?}", self.name, self.normal, self.floating.unwrap_or_default(), self.border);
         } else {
             value = self.normal.w()
                 - (((self.margin.left + self.margin.right) as f32) * self.margin_multiplier) as i32
@@ -241,7 +241,7 @@ impl Window {
             Some(requested) if requested.minw() > 0 && self.floating() => requested.minw(),
             _ => 100,
         };
-        tracing::info!("w limit: {:?} value={:?} limit={:?} managed={}", self.name, value, limit, self.is_managed());
+        tracing::info!("w limit: {:?} value={:?} limit={:?} managed={} requested={:?}", self.name, value, limit, self.is_managed(), self.requested);
         if value < limit && self.is_managed() {
             value = limit;
         }
@@ -258,7 +258,7 @@ impl Window {
         } else if self.floating() && self.floating.is_some() {
             let relative = self.normal + self.floating.unwrap_or_default();
             value = relative.h() - (self.border * 2);
-            tracing::info!("h floating: {:?} relative={:?} border={:?}", self.name, relative, self.border);
+            tracing::info!("h floating: {:?} normal={:?} floating={:?} border={:?}", self.name, self.normal, self.floating.unwrap_or_default(), self.border);
         } else {
             value = self.normal.h()
                 - (((self.margin.top + self.margin.bottom) as f32) * self.margin_multiplier) as i32
@@ -270,7 +270,7 @@ impl Window {
             Some(requested) if requested.minh() > 0 && self.floating() => requested.minh(),
             _ => 100,
         };
-        tracing::info!("h limit: {:?} value={:?} limit={:?} managed={}", self.name, value, limit, self.is_managed());
+        tracing::info!("h limit: {:?} value={:?} limit={:?} managed={} requested={:?}", self.name, value, limit, self.is_managed(), self.requested);
         if value < limit && self.is_managed() {
             value = limit;
         }
