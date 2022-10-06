@@ -225,24 +225,27 @@ impl Window {
         let mut value;
         if self.is_fullscreen() {
             value = self.normal.w();
+            tracing::info!("w fullscreen: {:?} {:?} ", self.name, self.normal);
         } else if self.floating() && self.floating.is_some() {
             let relative = self.normal + self.floating.unwrap_or_default();
             value = relative.w() - (self.border * 2);
+            tracing::info!("w floating: {:?} relative={:?} border={:?}", self.name, relative, self.border);
         } else {
             value = self.normal.w()
                 - (((self.margin.left + self.margin.right) as f32) * self.margin_multiplier) as i32
                 - (self.border * 2);
+            tracing::info!("w else: {:?} normal={:?} ={:?} ={:?} ", self.name, self.margin, self.margin_multiplier, self.border);
+
         }
         let limit = match self.requested {
             Some(requested) if requested.minw() > 0 && self.floating() => requested.minw(),
             _ => 100,
         };
+        tracing::info!("w limit: {:?} value={:?} limit={:?} managed={}", self.name, value, limit, self.is_managed());
         if value < limit && self.is_managed() {
             value = limit;
         }
-        tracing::info!(
-            "Width: {:?}", value
-        );
+        tracing::info!("Width: {:?} {:?}", self.name, value);
         value
     }
 
@@ -251,24 +254,27 @@ impl Window {
         let mut value;
         if self.is_fullscreen() {
             value = self.normal.h();
+            tracing::info!("h fullscreen: {:?} {:?} ", self.name, self.normal);
         } else if self.floating() && self.floating.is_some() {
             let relative = self.normal + self.floating.unwrap_or_default();
             value = relative.h() - (self.border * 2);
+            tracing::info!("h floating: {:?} relative={:?} border={:?}", self.name, relative, self.border);
         } else {
             value = self.normal.h()
                 - (((self.margin.top + self.margin.bottom) as f32) * self.margin_multiplier) as i32
                 - (self.border * 2);
+
+            tracing::info!("h else: {:?} normal={:?} ={:?} ={:?} ", self.name, self.margin, self.margin_multiplier, self.border);
         }
         let limit = match self.requested {
             Some(requested) if requested.minh() > 0 && self.floating() => requested.minh(),
             _ => 100,
         };
+        tracing::info!("h limit: {:?} value={:?} limit={:?} managed={}", self.name, value, limit, self.is_managed());
         if value < limit && self.is_managed() {
             value = limit;
         }
-        tracing::info!(
-            "height: {:?}", value
-        );
+        tracing::info!("height: {:?} {:?}", self.name, value);
         value
     }
 
