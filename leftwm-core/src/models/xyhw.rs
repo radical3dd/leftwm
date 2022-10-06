@@ -68,8 +68,8 @@ impl Add for Xyhw {
         Self {
             x: self.x + other.x,
             y: self.y + other.y,
-            w: self.w + other.w,
-            h: self.h + other.h,
+            w: cmp::max(self.w + other.w,0),
+            h: cmp::max(self.h + other.h,0),
             minw: cmp::max(self.minw, other.minw),
             maxw: cmp::min(self.maxw, other.maxw),
             minh: cmp::max(self.minh, other.minh),
@@ -84,8 +84,8 @@ impl Sub for Xyhw {
         Self {
             x: self.x - other.x,
             y: self.y - other.y,
-            w: self.w - other.w,
-            h: self.h - other.h,
+            w: cmp::max(self.w - other.w, 0),
+            h: cmp::max(self.h - other.h, 0),
             minw: cmp::max(self.minw, other.minw),
             maxw: cmp::min(self.maxw, other.maxw),
             minh: cmp::max(self.minh, other.minh),

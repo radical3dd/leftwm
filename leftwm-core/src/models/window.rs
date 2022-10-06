@@ -143,15 +143,14 @@ impl Window {
         if let Some(value) = &mut self.floating {
             value.clear_minmax();
         }
+        tracing::info!("set_floating_offsets: {:?}", self.floating);
     }
 
     pub fn set_floating_exact(&mut self, value: Xyhw) {
         let mut new_value = value - self.normal;
         new_value.clear_minmax();
         self.floating = Some(new_value);
-        tracing::info!(
-            "set_floating_exact: {:?}", self.floating
-        );
+        tracing::info!("set_floating_exact: {:?}", self.floating);
     }
 
     #[must_use]
