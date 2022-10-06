@@ -307,7 +307,7 @@ fn is_scratchpad(state: &State, window: &Window) -> bool {
 
 fn set_relative_floating(window: &mut Window, ws: &Workspace, outer: Xyhw) {
     window.set_floating(true);
-    window.normal = ws.xyhw;
+    //window.normal = ws.xyhw;
     let xyhw = window.requested.map_or_else(
         || ws.center_halfed(),
         |mut requested| {

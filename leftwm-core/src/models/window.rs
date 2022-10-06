@@ -139,8 +139,7 @@ impl Window {
     }
 
     pub fn set_floating_offsets(&mut self, value: Option<Xyhw>) {
-        //self.floating = value;
-        self.floating = value.map(|value| value - self.normal);
+        self.floating = value;
         if let Some(value) = &mut self.floating {
             value.clear_minmax();
         }
@@ -148,8 +147,7 @@ impl Window {
     }
 
     pub fn set_floating_exact(&mut self, value: Xyhw) {
-        //let mut new_value = value - self.normal;
-        let mut new_value = value;
+        let mut new_value = value - self.normal;
         new_value.clear_minmax();
         self.floating = Some(new_value);
         tracing::info!("set_floating_exact: {:?} value:{:?} normal:{:?}", self.floating, value, self.normal);
