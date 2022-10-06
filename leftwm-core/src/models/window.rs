@@ -373,6 +373,8 @@ impl Window {
             let y = offset.y() + self.normal.y();
             offset.set_x(x - workspace.xyhw.x());
             offset.set_y(y - workspace.xyhw.y());
+            
+            tracing::info!("set_floating_offsets 1 : {:?}", offset);
             self.set_floating_offsets(Some(offset));
 
             let x = start_loc.x() + self.normal.x();

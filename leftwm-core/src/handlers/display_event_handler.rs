@@ -74,6 +74,7 @@ fn from_change_to_normal_mode(state: &mut State) -> bool {
                 // Re-adjust the floating offsets to the new workspace.
                 let exact = window.normal + offset;
                 offset = exact - normal;
+                tracing::info!("set_floating_offsets 4 : {:?}", offset);
                 window.set_floating_offsets(Some(offset));
                 window.tag = tag;
                 window.apply_margin_multiplier(margin_multiplier);
@@ -139,6 +140,7 @@ fn prepare_window(state: &mut State, handle: WindowHandle) {
             let container = w.container_size.unwrap_or_default();
             let normal = w.normal;
             let floating = normal - container;
+            tracing::info!("set_floating_offsets 5 : {:?}", floating);
             w.set_floating_offsets(Some(floating));
             w.start_loc = Some(floating);
             w.set_floating(true);

@@ -29,6 +29,7 @@ fn process_window(window: &mut Window, offset_x: i32, offset_y: i32) {
     let start = window.start_loc.unwrap_or_default();
     offset.set_x(start.x() + offset_x);
     offset.set_y(start.y() + offset_y);
+    tracing::info!("set_floating_offsets 6 : {:?}", offset);
     window.set_floating_offsets(Some(offset));
 }
 

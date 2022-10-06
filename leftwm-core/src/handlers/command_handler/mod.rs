@@ -512,6 +512,7 @@ fn tile_to_floating(state: &mut State) -> Option<bool> {
     normal.set_h(height);
     let floating = normal - offset;
 
+    tracing::info!("set_floating_offsets 3 : {:?}", floating);
     window.set_floating_offsets(Some(floating));
     window.start_loc = Some(floating);
     window.set_floating(true);

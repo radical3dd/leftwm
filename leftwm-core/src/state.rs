@@ -184,6 +184,7 @@ impl State {
                 had_strut = old_window.strut.is_some() || had_strut;
 
                 new_window.set_floating(old_window.floating());
+                tracing::info!("set_floating_offsets 2 : {:?}", old_window.get_floating_offsets());
                 new_window.set_floating_offsets(old_window.get_floating_offsets());
                 new_window.apply_margin_multiplier(old_window.margin_multiplier);
                 new_window.pid = old_window.pid;
