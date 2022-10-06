@@ -149,6 +149,9 @@ impl Window {
         let mut new_value = value - self.normal;
         new_value.clear_minmax();
         self.floating = Some(new_value);
+        tracing::info!(
+            "set_floating_exact: {:?}", self.floating
+        );
     }
 
     #[must_use]
@@ -237,6 +240,9 @@ impl Window {
         if value < limit && self.is_managed() {
             value = limit;
         }
+        tracing::info!(
+            "Width: {:?}", value
+        );
         value
     }
 
@@ -260,6 +266,9 @@ impl Window {
         if value < limit && self.is_managed() {
             value = limit;
         }
+        tracing::info!(
+            "height: {:?}", value
+        );
         value
     }
 
