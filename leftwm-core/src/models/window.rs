@@ -150,7 +150,7 @@ impl Window {
         let mut new_value = value - self.normal;
         new_value.clear_minmax();
         self.floating = Some(new_value);
-        tracing::info!("set_floating_exact: {:?}", self.floating);
+        tracing::info!("set_floating_exact: {:?} value:{:?} normal:{:?}", self.floating, value, self.normal);
     }
 
     #[must_use]

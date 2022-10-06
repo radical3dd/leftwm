@@ -320,6 +320,7 @@ fn set_relative_floating(window: &mut Window, ws: &Workspace, outer: Xyhw) {
             }
         },
     );
+    tracing::info!("set_floating_exact 2: {:?}", xyhw);
     window.set_floating_exact(xyhw);
 }
 
@@ -366,6 +367,7 @@ fn setup_window(
             {
                 let new_float_exact = s.xyhw(&ws.xyhw);
                 window.normal = ws.xyhw;
+                tracing::info!("set_floating_exact 3: {:?}", new_float_exact);
                 window.set_floating_exact(new_float_exact);
                 return;
             }
@@ -394,6 +396,7 @@ fn setup_window(
                     window.set_floating(true);
                     let new_float_exact = ws.center_halfed();
                     window.normal = ws.xyhw;
+                    tracing::info!("set_floating_exact 4: {:?}", new_float_exact);
                     window.set_floating_exact(new_float_exact);
                 } else {
                     set_relative_floating(window, ws, ws.xyhw);

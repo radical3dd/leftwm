@@ -88,6 +88,7 @@ impl XyhwChange {
         if window.floating() {
             let mut current = window.calculated_xyhw();
             changed = self.update(&mut current);
+            tracing::info!("set_floating_exact 5: {:?}", current);
             window.set_floating_exact(current);
         }
         changed

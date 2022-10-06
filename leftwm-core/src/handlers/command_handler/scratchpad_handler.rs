@@ -304,6 +304,7 @@ pub fn attach_scratchpad<C: Config, SERVER: DisplayServer>(
         // Put window in correct position
         window.set_floating(true);
         window.normal = ws.xyhw;
+        tracing::info!("set_floating_exact 1: {:?}", new_float_exact);
         window.set_floating_exact(new_float_exact);
         tracing::debug!("Set window to floating: {:?}", window);
 
